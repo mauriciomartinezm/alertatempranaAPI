@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 // Scopes: Modify these if you need different permissions.
 const SCOPES = process.env.scopes; // Cambié a 'send' para poder enviar correos
 const TOKEN_PATH = path.join(process.cwd(), "token.json");
-const CREDENTIALS_PATH = process.env.credentials_path;
+const CREDENTIALS = process.env.credentials;
 
 /**
  * Reads previously authorized credentials from the save file.
@@ -46,9 +46,7 @@ async function loadSavedCredentialsIfExist() {
  * @return {Promise<void>}
  */
 async function saveCredentials(client) {
-  const content = await fs.readFile(CREDENTIALS_PATH);
-  const keys = JSON.parse(content);
-  const key = keys.installed || keys.web;
+  const key = CREDENTIALS.web || CREDENTIALS.installed;
   const payload = JSON.stringify({
     type: "authorized_user",
     client_id: key.client_id,
@@ -68,7 +66,7 @@ async function authorize() {
   }
   client = await authenticate({
     scopes: SCOPES,
-    keyfilePath: CREDENTIALS_PATH,
+    credentials: CREDENTIALS,
   });
   if (client.credentials) {
     await saveCredentials(client);
