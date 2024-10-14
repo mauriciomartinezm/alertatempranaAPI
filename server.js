@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 // Scopes: Modify these if you need different permissions.
 const SCOPES = process.env.scopes; // Cambié a 'send' para poder enviar correos
 const TOKEN_PATH = path.join(process.cwd(), "token.json");
-const CREDENTIALS = process.env.credentials;
+const CREDENTIALS = JSON.parse(process.env.credentials);
 
 /**
  * Reads previously authorized credentials from the save file.
