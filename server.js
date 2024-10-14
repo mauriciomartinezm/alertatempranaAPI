@@ -17,6 +17,7 @@ const SCOPES = process.env.scopes; // Cambié a 'send' para poder enviar correos
 const TOKEN_PATH = path.join(process.cwd(), "token.json");
 const CREDENTIALS = JSON.parse(process.env.credentials); // Parsear la variable de entorno
 const REFRESH_TOKEN = process.env.refresh_token 
+console.log(REFRESH_TOKEN);
 async function loadSavedCredentialsIfExist() {
   try {
     const content = await fs.readFile(TOKEN_PATH);
