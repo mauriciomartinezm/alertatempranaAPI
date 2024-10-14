@@ -22,9 +22,9 @@ app.use(bodyParser.json());
 // Configurar OAuth 2.0
 
 // Scopes: Modify these if you need different permissions.
-const SCOPES = ["https://www.googleapis.com/auth/gmail.send"]; // Cambié a 'send' para poder enviar correos
+const SCOPES = process.env.scopes; // Cambié a 'send' para poder enviar correos
 const TOKEN_PATH = path.join(process.cwd(), "token.json");
-const CREDENTIALS_PATH = path.join(process.cwd(), "credentials.json");
+const CREDENTIALS_PATH = process.env.credentials_path;
 
 /**
  * Reads previously authorized credentials from the save file.
@@ -113,8 +113,8 @@ async function sendEmail() {
   }
 }
 // Configurar Twilio con Account SID y Auth Token
-//const accountSid = "AC60d6a776ef035b1cfed967a400bde0d8";
-//const authToken = "08ddfb9a61986bd1c56e28f5e239776f";
+//const accountSid = process.env.accountSid;
+//const authToken = process.env.authToken;
 //const client = new twilio(accountSid, authToken);
 
 // Declarar las variables correctamente
