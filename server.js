@@ -33,7 +33,7 @@ async function saveCredentials(client) {
     type: "authorized_user",
     client_id: key.client_id,
     client_secret: key.client_secret,
-    refresh_token: client.credentials.refresh_token,
+    refresh_token: REFRESH_TOKEN,
   });
   await fs.writeFile(TOKEN_PATH, payload);
 }
@@ -49,8 +49,8 @@ async function authorize() {
   const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
 
   // Aquí necesitas una forma de obtener un token. Si tienes un refresh_token guardado, úsalo.
-  if (CREDENTIALS.refresh_token) {
-    oAuth2Client.setCredentials({ refresh_token: CREDENTIALS.refresh_token });
+  if (REFRESH_TOKEN) {
+    oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
     return oAuth2Client;
   }
 
