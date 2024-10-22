@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Declarar las variables correctamente
-let sensorValues = "0";
+let sensorValues = "";
 let commands = "";
 
 // Ruta para recibir los datos (POST)
@@ -48,7 +48,6 @@ app.post("/recibir_datos", async (req, res) => {
 
 // Nueva ruta para servir los datos almacenados (GET)
 app.get("/recibir_datos", (req, res) => {
-  console.log("Solicitud recibida");
   res.json({ sensores: sensorValues, comandos: commands }); // Enviar los datos almacenados como JSON
 });
 
