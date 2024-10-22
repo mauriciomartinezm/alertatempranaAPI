@@ -7,13 +7,15 @@ const USER = process.env.user;
 const CLIENT_ID = process.env.client_id;
 const CLIENT_SECRET = process.env.client_secret;
 const REFRESH_TOKEN = process.env.refresh_token;
+var accessToken;
+var oauth2Client;
 
 const createTransporter = async () => {
-  const oauth2Client = new OAuth2(CLIENT_ID, CLIENT_SECRET, "https://developers.google.com/oauthplayground");
+  oauth2Client = new OAuth2(CLIENT_ID, CLIENT_SECRET, "https://developers.google.com/oauthplayground");
 
   oauth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
-  const accessToken = await oauth2Client.getAccessToken();
+  accessToken = await oauth2Client.getAccessToken();
 
   return nodemailer.createTransport({
     service: "gmail",
@@ -42,7 +44,7 @@ const enviarCorreo = async (to, subject, htmlContent) => {
     const info = await transporter.sendMail(mailOptions);
     return(`Correo enviado: ${info.response}`);
   } catch (error) {
-    return(`Error enviando el correo: ${error}`);
+    return(`Error envianddo el correo: ${error} user: ${oauth2Client}`);
   }
 };
 
