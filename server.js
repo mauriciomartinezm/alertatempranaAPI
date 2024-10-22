@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Declarar las variables correctamente
-let sensorValues = "";
+let sensorValues = "0";
 let commands = "";
 
 // Ruta para recibir los datos (POST)
